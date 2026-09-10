@@ -39,24 +39,24 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
             {t('app.name')}
           </h1>
-          <p className="text-gray-600">{t('app.tagline')}</p>
+          <p className="text-gray-600 dark:text-gray-300">{t('app.tagline')}</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="card">
           <div className="flex items-center gap-2 mb-6">
-            <LogIn className="text-blue-600" />
-            <h2 className="text-2xl font-bold text-gray-900">{t('auth.login')}</h2>
+            <LogIn className="text-blue-600 dark:text-blue-400" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('auth.login')}</h2>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                 {t('auth.email')}
               </label>
               <input
@@ -64,16 +64,16 @@ const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input"
                 required
                 placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex justify-between">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 flex justify-between">
                 <span>{t('auth.password')}</span>
-                <Link to="/forgot-password" tabIndex={-1} className="text-xs text-blue-600 hover:underline">
+                <Link to="/forgot-password" tabIndex={-1} className="text-xs text-blue-600 dark:text-blue-400 hover:underline">
                   {t('auth.forgotPassword')}
                 </Link>
               </label>
@@ -82,7 +82,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input"
                 required
                 placeholder="••••••••"
               />
@@ -96,7 +96,7 @@ const Login = () => {
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-200">
                 {t('auth.rememberMe')}
               </label>
             </div>
@@ -104,7 +104,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors disabled:opacity-50"
+              className="btn btn-primary w-full"
             >
               {loading ? t('auth.loggingIn') : t('auth.loginButton')}
             </button>
@@ -112,17 +112,17 @@ const Login = () => {
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">{t('auth.orContinueWith')}</span>
+              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">{t('auth.orContinueWith')}</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
           >
             <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -133,9 +133,9 @@ const Login = () => {
             {t('auth.continueWithGoogle')}
           </button>
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
             {t('auth.dontHaveAccount')}{' '}
-            <Link to="/register" className="text-blue-600 hover:underline font-medium">
+            <Link to="/register" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
               {t('auth.registerHere')}
             </Link>
           </p>
