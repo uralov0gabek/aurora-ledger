@@ -149,12 +149,29 @@ try {
   });
   console.log('✅ Migrations completed successfully.');
   
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🌐 CORS enabled for: ${process.env.FRONTEND_URL || '*'}`);
     console.log(`⏰ Recurring transactions cron job scheduled (daily at 00:05)`);
   });
+
+  // Handle unhandled promise rejections globally
+  process.on('unhandledRejection', (err) => {
+    console.error('❌ UNHANDLED REJECTION! 💥 Shutting down...');
+    console.error(err.name, err.message, err.stack);
+    server.close(() => {
+      process.exit(1);
+    });
+  });
+
+  // Handle uncaught exceptions globally
+  process.on('uncaughtException', (err) => {
+    console.error('❌ UNCAUGHT EXCEPTION! 💥 Shutting down...');
+    console.error(err.name, err.message, err.stack);
+    process.exit(1);
+  });
+
 } catch (error) {
   console.error('❌ Failed to run migrations. Server will not start.');
   console.error(error.message);
