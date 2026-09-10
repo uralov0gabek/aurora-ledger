@@ -108,13 +108,14 @@ export function formatCurrency(amount, currency) {
     ZAR: 'R',
     TRY: '₺',
     AED: 'د.إ',
-    SAR: 'ر.س'
+    SAR: 'ر.س',
+    UZS: 'soʻm'
   };
 
   const symbol = symbols[currency] || currency + ' ';
   
   // Currencies without decimal places
-  const noDecimalCurrencies = ['VND', 'JPY', 'KRW', 'IDR'];
+  const noDecimalCurrencies = ['VND', 'JPY', 'KRW', 'IDR', 'UZS'];
   
   const formattedAmount = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: noDecimalCurrencies.includes(currency) ? 0 : 2,
@@ -122,7 +123,7 @@ export function formatCurrency(amount, currency) {
   }).format(amount);
 
   // Currencies that put symbol after amount
-  const symbolAfterCurrencies = ['VND', 'JPY', 'KRW', 'IDR', 'SEK', 'NOK', 'DKK', 'PLN'];
+  const symbolAfterCurrencies = ['VND', 'JPY', 'KRW', 'IDR', 'SEK', 'NOK', 'DKK', 'PLN', 'UZS'];
   
   if (symbolAfterCurrencies.includes(currency)) {
     return `${formattedAmount} ${symbol}`;
@@ -170,6 +171,7 @@ async function cacheRate(fromCurrency, toCurrency, rate) {
 
 // Popular currencies list
 export const POPULAR_CURRENCIES = [
+  { code: 'UZS', name: 'Uzbekistani Som', symbol: 'soʻm', flag: '🇺🇿' },
   { code: 'USD', name: 'US Dollar', symbol: '$', flag: '🇺🇸' },
   { code: 'EUR', name: 'Euro', symbol: '€', flag: '🇪🇺' },
   { code: 'VND', name: 'Vietnamese Dong', symbol: '₫', flag: '🇻🇳' },

@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCurrency } from '../context/CurrencyContext';
 
 const CURRENCIES = [
+  { code: 'UZS', name: 'Uzbekistani Som', symbol: 'soʻm', flag: '🇺🇿' },
   { code: 'USD', name: 'US Dollar', symbol: '$', flag: '🇺🇸' },
   { code: 'EUR', name: 'Euro', symbol: '€', flag: '🇪🇺' },
   { code: 'VND', name: 'Vietnamese Dong', symbol: '₫', flag: '🇻🇳' },

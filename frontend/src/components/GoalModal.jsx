@@ -7,7 +7,7 @@ import { useCurrency } from '../context/CurrencyContext';
 
 const ICONS = ['🎯', '🏠', '🚗', '✈️', '💍', '📚', '💰', '🎓', '🏖️', '🎮', '📱', '⌚', '🎸', '🏋️', '🎨'];
 const PRIORITIES = ['low', 'medium', 'high'];
-const SUPPORTED_CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CNY', 'KRW', 'VND', 'THB', 'SGD', 'MYR', 'IDR', 'PHP', 'INR', 'AUD', 'CAD'];
+const SUPPORTED_CURRENCIES = ['UZS', 'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'KRW', 'VND', 'THB', 'SGD', 'MYR', 'IDR', 'PHP', 'INR', 'AUD', 'CAD'];
 
 const GoalModal = ({ goal, onClose }) => {
   const { t } = useTranslation();

@@ -21,6 +21,7 @@ const BudgetModal = ({ month, year, budget = null, onClose }) => {
   const [quickAddName, setQuickAddName] = useState('');
 
   const CURRENCIES = [
+    { code: 'UZS', name: 'Uzbekistani Som', symbol: 'soʻm' },
     { code: 'USD', name: 'US Dollar', symbol: '$' },
     { code: 'VND', name: 'Vietnamese Dong', symbol: '₫' },
     { code: 'EUR', name: 'Euro', symbol: '€' },

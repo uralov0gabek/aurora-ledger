@@ -50,6 +50,7 @@ const TransactionModal = ({ transaction, categories: initialCategories, onClose 
   const filteredCategories = categories.filter(cat => cat.type === formData.type);
   
   const CURRENCIES = [
+    { code: 'UZS', name: 'Uzbekistani Som', symbol: 'soʻm' },
     { code: 'USD', name: 'US Dollar', symbol: '$' },
     { code: 'VND', name: 'Vietnamese Dong', symbol: '₫' },
     { code: 'EUR', name: 'Euro', symbol: '€' },
