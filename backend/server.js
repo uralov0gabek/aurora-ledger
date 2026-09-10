@@ -26,6 +26,12 @@ import { processRecurringTransactions } from './utils/recurring-processor.js';
 
 dotenv.config();
 
+if (!process.env.DATABASE_URL) {
+  console.error('❌ FATAL ERROR: DATABASE_URL environment variable is missing.');
+  console.error('Please configure DATABASE_URL in your Render environment settings.');
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 

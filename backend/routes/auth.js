@@ -60,10 +60,13 @@ router.post('/register',
       }
 
       // Generate JWT with userId for consistency
+      const jwtSecret = process.env.JWT_SECRET || 'fallback_secret_key_please_change_in_production';
+      const jwtExpiresIn = process.env.JWT_EXPIRES_IN || '30d';
+      
       const token = jwt.sign(
         { userId: user.id, id: user.id, email: user.email, role: 'user' },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN }
+        jwtSecret,
+        { expiresIn: jwtExpiresIn }
       );
 
       res.status(201).json({
@@ -112,11 +115,14 @@ router.post('/login',
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // Generate JWT with userId and role for middleware
+      // Generate JWT with userId for consistency
+      const jwtSecret = process.env.JWT_SECRET || 'fallback_secret_key_please_change_in_production';
+      const jwtExpiresIn = process.env.JWT_EXPIRES_IN || '30d';
+      
       const token = jwt.sign(
         { userId: user.id, id: user.id, email: user.email, role: user.role || 'user' },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN }
+        jwtSecret,
+        { expiresIn: jwtExpiresIn }
       );
 
       res.json({

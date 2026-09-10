@@ -5,6 +5,12 @@ dotenv.config();
 
 const { Pool } = pg;
 
+if (!process.env.DATABASE_URL) {
+  console.error('❌ FATAL ERROR: DATABASE_URL environment variable is missing.');
+  console.error('Please configure DATABASE_URL in your Render environment settings.');
+  process.exit(1);
+}
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
