@@ -70,4 +70,4 @@ const migrateSavingGoals = async () => {
   }
 };
 
-migrateSavingGoals().catch(console.error);
+migrateSavingGoals().catch(err => { console.error(err); process.exit(1); });

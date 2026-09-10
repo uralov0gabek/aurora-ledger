@@ -35,5 +35,5 @@ const migrateAmountLimit = async () => {
   }
 };
 
-migrateAmountLimit().catch(console.error);
+migrateAmountLimit().catch(err => { console.error(err); process.exit(1); });
 

@@ -56,5 +56,5 @@ const createRecurringTransactions = async () => {
   }
 };
 
-createRecurringTransactions().catch(console.error);
+createRecurringTransactions().catch(err => { console.error(err); process.exit(1); });
 

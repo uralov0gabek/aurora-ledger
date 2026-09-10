@@ -35,5 +35,5 @@ const addCurrencyColumn = async () => {
   }
 };
 
-addCurrencyColumn().catch(console.error);
+addCurrencyColumn().catch(err => { console.error(err); process.exit(1); });
 

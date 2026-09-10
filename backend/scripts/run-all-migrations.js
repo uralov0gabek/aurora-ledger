@@ -25,6 +25,8 @@ for (const script of scriptsToRun) {
   console.log(`\n▶️  Running ${script}...`);
   try {
     execSync(`node ${path.join(__dirname, script)}`, { stdio: 'inherit' });
+    // Add a 1.5 second delay to allow serverless DB to close the connection gracefully
+    execSync('sleep 1.5');
   } catch (error) {
     console.error(`❌ Error running ${script}. Halting migrations.`);
     process.exit(1);
