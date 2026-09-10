@@ -18,8 +18,8 @@ pool.on('connect', () => {
 });
 
 pool.on('error', (err) => {
-  console.error('❌ Unexpected database error:', err);
-  process.exit(-1);
+  console.error('❌ Unexpected database error on idle client:', err);
+  // Do NOT process.exit(-1) here, as serverless DBs like Neon will routinely close idle connections.
 });
 
 export default pool;
