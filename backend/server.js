@@ -24,6 +24,9 @@ import familiesRoutes from './routes/families.js';
 import familySharedRoutes from './routes/family-shared.js';
 import { processRecurringTransactions } from './utils/recurring-processor.js';
 
+import helmet from 'helmet';
+import compression from 'compression';
+
 dotenv.config();
 
 if (!process.env.DATABASE_URL) {
@@ -34,6 +37,10 @@ if (!process.env.DATABASE_URL) {
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Security & Performance Middleware
+app.use(helmet()); // Secure HTTP headers
+app.use(compression()); // Gzip compression for responses
 
 // Middleware
 app.use(cors({

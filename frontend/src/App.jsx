@@ -65,8 +65,11 @@ function PageLoader() {
   );
 }
 
+import ErrorBoundary from './components/ErrorBoundary';
+
 function App() {
   return (
+    <ErrorBoundary>
     <ThemeProvider>
       <AuthProvider>
         <CurrencyProvider>
@@ -148,10 +151,10 @@ function App() {
         </Suspense>
         </Router>
       </CurrencyProvider>
-    </AuthProvider>
+      </AuthProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
 export default App;
-
