@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(authMiddleware);
 
 // Get spending forecast for next month
-router.get('/forecast', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const userId = req.user.id;
     const { category_id, currency: displayCurrency } = req.query;
@@ -123,7 +123,7 @@ router.get('/forecast', async (req, res) => {
 });
 
 // Get category-wise forecast
-router.get('/forecast/categories', async (req, res) => {
+router.get('/categories', async (req, res) => {
   try {
     const userId = req.user.id;
     const { currency: displayCurrency } = req.query;
