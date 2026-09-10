@@ -724,7 +724,6 @@ export default function Family() {
                       </div>
                     ))}
                   </div>
-                </div>
 
                 {/* Invite Codes Section */}
                 {['head', 'manager'].includes(familyDetails.currentUserRole) && (
