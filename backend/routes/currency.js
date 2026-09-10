@@ -46,7 +46,7 @@ router.get('/rates/:base', async (req, res) => {
     });
   } catch (error) {
     console.error('Error getting all rates:', error);
-    res.status(500).json({ error: 'Failed to fetch rates' });
+    res.status(500).json({ error: 'Failed to fetch rates', details: error.message });
   }
 });
 
