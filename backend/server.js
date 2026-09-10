@@ -108,10 +108,10 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// Error handler
+// Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 
@@ -134,13 +134,32 @@ if (process.env.PROCESS_RECURRING_ON_STARTUP === 'true') {
   });
 }
 
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🌐 CORS enabled for: ${process.env.FRONTEND_URL || '*'}`);
-  console.log(`⏰ Recurring transactions cron job scheduled (daily at 00:05)`);
-});
+try {
+  console.log('🔄 Running database migrations...');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  execSync('node scripts/run-all-migrations.js', { 
+    stdio: 'inherit',
+    cwd: __dirname
+  });
+  console.log('✅ Migrations completed successfully.');
+  
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🌐 CORS enabled for: ${process.env.FRONTEND_URL || '*'}`);
+    console.log(`⏰ Recurring transactions cron job scheduled (daily at 00:05)`);
+  });
+} catch (error) {
+  console.error('❌ Failed to run migrations. Server will not start.');
+  console.error(error.message);
+  process.exit(1);
+}
 
 export default app;
 
