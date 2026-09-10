@@ -144,4 +144,24 @@ router.put('/change-password',
   }
 );
 
+// Delete user account
+router.delete('/', authenticateToken, async (req, res) => {
+  try {
+    // Delete user (cascade will handle related records like transactions, budgets, etc.)
+    const result = await pool.query(
+      'DELETE FROM users WHERE id = $1 RETURNING id',
+      [req.user.userId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    console.error('Delete account error:', error);
+    res.status(500).json({ error: 'Failed to delete account' });
+  }
+});
+
 export default router;

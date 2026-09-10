@@ -338,7 +338,13 @@
     "passwordMismatch": "Parollar mos tushmadi",
     "passwordTooShort": "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
     "currentPasswordRequired": "Joriy parol kiritilishi shart",
-    "oauthPasswordInfo": "Siz Google orqali tizimga kirdingiz. Elektron pochta orqali ham kirish uchun parol o'rnating."
+    "oauthPasswordInfo": "Siz Google orqali tizimga kirdingiz. Elektron pochta orqali ham kirish uchun parol o'rnating.",
+    "deleteAccount": "Akkauntni o'chirish",
+    "deleteAccountDesc": "Akkauntingizni va barcha tegishli ma'lumotlarni butunlay o'chirish",
+    "deleteConfirmTitle": "Akkauntni o'chirish",
+    "deleteConfirmMessage": "Akkauntingizni o'chirishga ishonchingiz komilmi? Bu harakatni bekor qilib bo'lmaydi va barcha ma'lumotlaringiz butunlay o'chiriladi.",
+    "deletingAccount": "O'chirilmoqda...",
+    "accountDeleted": "Akkaunt muvaffaqiyatli o'chirildi!"
   },
   "admin": {
     "title": "Admin Boshqaruv Paneli",

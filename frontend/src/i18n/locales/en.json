@@ -338,7 +338,13 @@
     "passwordMismatch": "Passwords do not match",
     "passwordTooShort": "Password must be at least 6 characters",
     "currentPasswordRequired": "Current password is required",
-    "oauthPasswordInfo": "You logged in with Google. Set a password to also login with email."
+    "oauthPasswordInfo": "You logged in with Google. Set a password to also login with email.",
+    "deleteAccount": "Delete Account",
+    "deleteAccountDesc": "Permanently delete your account and all associated data",
+    "deleteConfirmTitle": "Delete Account",
+    "deleteConfirmMessage": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+    "deletingAccount": "Deleting...",
+    "accountDeleted": "Account deleted successfully!"
   },
   "admin": {
     "title": "Admin Dashboard",

@@ -4,10 +4,10 @@ import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { User, Mail, Lock, Save, Eye, EyeOff, Shield } from 'lucide-react';
+import { User, Mail, Lock, Save, Eye, EyeOff, Shield, Trash2, AlertTriangle } from 'lucide-react';
 
 const Profile = () => {
-  const { user, setUser } = useAuth();
+  const { user, setUser, logout } = useAuth();
   const { t } = useTranslation();
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -34,6 +34,8 @@ const Profile = () => {
   // Loading states
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
@@ -140,6 +142,21 @@ const Profile = () => {
       ...prev,
       [field]: !prev[field]
     }));
+  };
+
+  const handleDeleteAccount = async () => {
+    setIsDeleting(true);
+    try {
+      await axios.delete(`${API_URL}/profile`);
+      toast.success(t('profile.accountDeleted') || 'Account deleted successfully!');
+      logout();
+    } catch (error) {
+      const message = error.response?.data?.error || t('common.error') || 'Failed to delete account';
+      toast.error(message);
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteModal(false);
+    }
   };
 
   return (
@@ -371,6 +388,74 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
+      {/* Danger Zone */}
+      <div className="mt-6 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-red-200 dark:border-red-900/50 p-6">
+        <h3 className="text-lg font-semibold text-red-600 dark:text-red-500 mb-2 flex items-center gap-2">
+          <AlertTriangle size={20} />
+          Danger Zone
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+          {t('profile.deleteAccountDesc') || 'Permanently delete your account and all associated data'}
+        </p>
+        <button
+          onClick={() => setShowDeleteModal(true)}
+          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
+        >
+          <Trash2 size={18} />
+          {t('profile.deleteAccount') || 'Delete Account'}
+        </button>
+      </div>
+
+      {/* Delete Account Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md overflow-hidden">
+            <div className="p-6">
+              <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4 text-red-600 dark:text-red-500">
+                <AlertTriangle size={24} />
+              </div>
+              
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                {t('profile.deleteConfirmTitle') || 'Delete Account'}
+              </h3>
+              
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {t('profile.deleteConfirmMessage') || 'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.'}
+              </p>
+              
+              <div className="flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(false)}
+                  disabled={isDeleting}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors font-medium disabled:opacity-50"
+                >
+                  {t('common.cancel') || 'Cancel'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteAccount}
+                  disabled={isDeleting}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium flex items-center gap-2 disabled:opacity-50"
+                >
+                  {isDeleting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      {t('profile.deletingAccount') || 'Deleting...'}
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 size={18} />
+                      {t('common.delete') || 'Delete'}
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
